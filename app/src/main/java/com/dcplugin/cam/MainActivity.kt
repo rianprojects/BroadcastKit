@@ -1,0 +1,53 @@
+package com.dcplugin.cam
+
+import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
+import com.dcplugin.cam.databinding.ActivityMainBinding
+
+/** Single-Activity shell: fixed bottom nav + swappable fragment content. */
+class MainActivity : AppCompatActivity() {
+
+    private lateinit var binding: ActivityMainBinding
+
+    private val cameraFragment by lazy { CameraFragment() }
+    private val deckFragment by lazy { DeckFragment() }
+    private val tallyFragment by lazy { TallyFragment() }
+    private val moreFragment by lazy { MoreFragment() }
+    private var active: Fragment? = null
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        binding.bottomNav.root.setOnItemSelectedListener { item ->
+            val target = when (item.itemId) {
+                R.id.nav_camera -> cameraFragment
+                R.id.nav_deck -> deckFragment
+                R.id.nav_tally -> tallyFragment
+                R.id.nav_more -> moreFragment
+                else -> return@setOnItemSelectedListener false
+            }
+            showFragment(target)
+            true
+        }
+
+        if (savedInstanceState == null) {
+            binding.bottomNav.root.selectedItemId = R.id.nav_camera
+        }
+    }
+
+    private fun showFragment(fragment: Fragment) {
+        if (active === fragment) return
+        val fm = supportFragmentManager
+        val tx = fm.beginTransaction()
+        if (!fragment.isAdded) {
+            tx.add(R.id.fragment_container, fragment)
+        }
+        fm.fragments.forEach { if (it !== fragment) tx.hide(it) }
+        tx.show(fragment)
+        tx.commit()
+        active = fragment
+    }
+}
