@@ -33,19 +33,61 @@ android/
 - Perangkat Android dengan kamera (min. sesuai `minSdk` di `app/build.gradle.kts`)
 - OBS Studio dengan plugin/WebSocket aktif (opsional, untuk integrasi kontrol)
 
-## Cara Build & Jalankan
+## Tutorial Build
 
-1. Clone repo:
+### A. Build via Android Studio (paling gampang)
+
+1. Install [Android Studio](https://developer.android.com/studio) (sudah termasuk Android SDK).
+2. Clone repo:
+   ```bash
+   git clone https://github.com/rianprojects/android-dcplugin.git
+   ```
+3. Buka Android Studio → **Open** → pilih folder `android-dcplugin` (folder yang berisi `settings.gradle.kts`).
+4. Tunggu proses **Gradle Sync** selesai (pojok kanan bawah). Kalau diminta update Gradle/SDK, ikuti saja.
+5. Sambungkan HP Android via USB (aktifkan **USB Debugging** di Developer Options) atau siapkan emulator.
+6. Klik tombol **Run ▶** (atau `Shift+F10`) — pilih device tujuan.
+7. Aplikasi otomatis ter-install & terbuka di device.
+
+### B. Build via Command Line (CLI)
+
+1. Pastikan `JAVA_HOME` mengarah ke JDK 17+ dan Android SDK sudah terinstall (`ANDROID_HOME` di-set).
+2. Clone repo lalu masuk ke foldernya:
    ```bash
    git clone https://github.com/rianprojects/android-dcplugin.git
    cd android-dcplugin
    ```
-2. Buka folder ini di Android Studio, biarkan Gradle sync.
-3. Sambungkan device/emulator, lalu jalankan (`Run ▶`) atau via CLI:
+3. Build APK debug:
    ```bash
    ./gradlew assembleDebug
    ```
-4. Install APK hasil build ke device, pastikan device dan OBS/PC berada di jaringan Wi-Fi yang sama.
+   (Windows PowerShell: `.\gradlew.bat assembleDebug`)
+4. Hasil APK ada di:
+   ```
+   app/build/outputs/apk/debug/app-debug.apk
+   ```
+5. Install ke device yang sudah tersambung via ADB:
+   ```bash
+   adb install app/build/outputs/apk/debug/app-debug.apk
+   ```
+
+### C. Build APK Release (sudah di-sign, untuk dibagikan)
+
+1. Generate keystore (sekali saja):
+   ```bash
+   keytool -genkey -v -keystore release.keystore -alias dcplugin -keyalg RSA -keysize 2048 -validity 10000
+   ```
+2. Tambahkan konfigurasi signing di `app/build.gradle.kts` (`signingConfigs` + `buildTypes.release`), atau sign manual pakai `apksigner` setelah build:
+   ```bash
+   ./gradlew assembleRelease
+   apksigner sign --ks release.keystore app/build/outputs/apk/release/app-release-unsigned.apk
+   ```
+
+### Setelah Install
+
+1. Buka aplikasi, izinkan permission **Camera** dan **Notification** (untuk foreground service).
+2. Pastikan HP dan PC (OBS) terhubung di **Wi-Fi/jaringan yang sama**.
+3. Jalankan streaming dari app — catat alamat IP:port yang muncul.
+4. Di OBS, tambahkan **Source → Browser** atau **Media Source** dengan URL MJPEG tersebut, atau hubungkan lewat OBS WebSocket sesuai konfigurasi di app.
 
 ## Izin yang Digunakan
 
