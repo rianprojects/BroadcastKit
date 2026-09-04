@@ -557,6 +557,15 @@
                     android:padding="8dp"
                     android:text="Created by: Rian Projects — rianprojects.my.id" />
 
+                <TextView
+                    android:id="@+id/rebuilderLine"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:textColor="@color/text_hint"
+                    android:textSize="12sp"
+                    android:visibility="gone" />
+
                 <Space
                     android:layout_width="match_parent"
                     android:layout_height="72dp" />

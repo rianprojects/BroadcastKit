@@ -135,6 +135,11 @@ class CameraFragment : Fragment(), SensorEventListener {
         }
 
         binding.footerLink.setOnClickListener { openUrl("https://rianprojects.my.id") }
+        val rebuilder = getString(R.string.rebuilder_name)
+        if (rebuilder.isNotBlank()) {
+            binding.rebuilderLine.text = "Rebuilt by: $rebuilder"
+            binding.rebuilderLine.visibility = View.VISIBLE
+        }
         binding.whatsappFab.setOnClickListener {
             openUrl("https://wa.me/6282162928130?text=" + Uri.encode("order projects"))
         }

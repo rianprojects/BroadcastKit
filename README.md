@@ -108,6 +108,17 @@ Proyek ini **open source dan bebas digunakan**. Silakan:
 
 Tidak ada batasan berekspresi — cukup pertahankan notice lisensi di bawah saat mendistribusikan ulang.
 
+### Kalau kamu rebuild/fork
+
+Footer nama pembuat asli (**Rian Projects**) tetap tertanam di aplikasi dan tidak perlu dihapus. Untuk menambahkan namamu sebagai rebuilder, isi resource berikut sebelum build:
+
+```xml
+<!-- app/src/main/res/values/strings.xml -->
+<string name="rebuilder_name">Nama Kamu — link.mu</string>
+```
+
+Baris "Rebuilt by: ..." otomatis muncul di footer aplikasi di bawah nama pembuat asli. Kalau dikosongkan, baris ini tersembunyi.
+
 ## Lisensi
 
 Proyek ini dilisensikan di bawah [MIT License](LICENSE) — bebas dipakai, dimodifikasi, dan didistribusikan ulang, dengan atau tanpa perubahan, untuk keperluan apa pun.
