@@ -293,15 +293,7 @@ class CameraFragment : Fragment(), SensorEventListener {
             override fun onNothingSelected(parent: AdapterView<*>?) {}
         }
 
-        val camOptions = listOf("Back Camera", "Front Camera")
-        binding.cameraSpinner.adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_dropdown_item, camOptions)
-        binding.cameraSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(parent: AdapterView<*>?, view: View?, pos: Int, id: Long) {
-                val facing = if (pos == 0) CameraSelector.LENS_FACING_BACK else CameraSelector.LENS_FACING_FRONT
-                if (boundService?.lensFacing != facing) boundService?.setLensFacing(facing)
-            }
-            override fun onNothingSelected(parent: AdapterView<*>?) {}
-        }
+        binding.switchCameraButton.setOnClickListener { boundService?.switchCamera() }
 
         val orientOptions = listOf("Auto / Sensor", "Portrait Lock", "Landscape Lock")
         binding.orientationSpinner.adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_dropdown_item, orientOptions)
@@ -376,8 +368,6 @@ class CameraFragment : Fragment(), SensorEventListener {
         binding.flashButton.text = if (boundService?.isTorchOn == true) "Flash: ON" else "Flash: OFF"
         binding.mirrorSwitch.isChecked = boundService?.isMirrorOn == true
         binding.aeLockSwitch.isChecked = boundService?.isAeLocked == true
-        val isFront = boundService?.lensFacing == CameraSelector.LENS_FACING_FRONT
-        binding.cameraSpinner.setSelection(if (isFront) 1 else 0)
     }
 
     private fun ensurePermissionThenStart() {

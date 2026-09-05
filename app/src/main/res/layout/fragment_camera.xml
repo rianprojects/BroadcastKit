@@ -204,17 +204,13 @@
                             android:textSize="15sp"
                             android:layout_marginBottom="14dp" />
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Camera Lens"
-                            android:textColor="@color/text_secondary"
-                            android:textSize="12sp"
-                            android:layout_marginBottom="4dp" />
-                        <Spinner
-                            android:id="@+id/cameraSpinner"
+                        <Button
+                            android:id="@+id/switchCameraButton"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:text="Switch Camera (Back/Front)"
+                            android:backgroundTint="@color/control_bg"
+                            android:textColor="@color/text_primary"
                             android:layout_marginBottom="8dp" />
 
                         <Button
