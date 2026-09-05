@@ -99,8 +99,8 @@ android/
 
 1. Buka aplikasi, izinkan permission **Camera** dan **Notification** (untuk foreground service).
 2. Pastikan HP dan PC (OBS) terhubung di **Wi-Fi/jaringan yang sama**.
-3. Jalankan streaming dari app — catat alamat IP:port yang muncul.
-4. Di OBS, tambahkan **Source → Browser** atau **Media Source** dengan URL MJPEG tersebut, atau hubungkan lewat OBS WebSocket sesuai konfigurasi di app.
+3. Jalankan streaming dari app — catat alamat IP:port yang muncul (default port **8899**, bisa diganti manual di app kalau bentrok dengan service lain di HP).
+4. Di OBS, tambahkan **Source → Browser** atau **Media Source** dengan URL MJPEG tersebut (`http://<ip-hp>:8899/video`), atau hubungkan lewat OBS WebSocket sesuai konfigurasi di app.
 
 ## Izin yang Digunakan
 
