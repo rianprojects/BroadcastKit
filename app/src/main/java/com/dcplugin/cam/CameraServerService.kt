@@ -263,27 +263,24 @@ class CameraServerService : LifecycleService() {
 
     private fun ImageProxy.toJpeg(mirror: Boolean, watermark: String?, quality: Int): ByteArray? {
         if (format != ImageFormat.YUV_420_888) return null
-        val nv21 = yuv420ToNv21(this)
+        val nv21 = yuv420ToNv21(this).let { if (mirror) flipNv21Horizontal(it, width, height) else it }
         val yuvImage = YuvImage(nv21, ImageFormat.NV21, width, height, null)
 
-        if (!mirror && watermark.isNullOrEmpty()) {
+        if (watermark.isNullOrEmpty()) {
+            // Mirroring is done on the raw YUV bytes above (cheap row reverse), so this
+            // fast path (single JPEG encode) also covers the mirrored case — no need to
+            // decode back to a Bitmap and re-encode, which used to add a full extra
+            // encode/decode pass per frame and caused visible stream delay.
             val out = ByteArrayOutputStream()
             yuvImage.compressToJpeg(Rect(0, 0, width, height), quality, out)
             return out.toByteArray()
         }
 
-        // Need Bitmap for mirror / watermark
+        // Watermark text needs a Canvas, so only this path needs a Bitmap.
         val out = ByteArrayOutputStream()
         yuvImage.compressToJpeg(Rect(0, 0, width, height), 100, out)
         val rawBytes = out.toByteArray()
-        var bmp = BitmapFactory.decodeByteArray(rawBytes, 0, rawBytes.size) ?: return rawBytes
-
-        if (mirror) {
-            val matrix = Matrix().apply { preScale(-1.0f, 1.0f) }
-            val mirrored = Bitmap.createBitmap(bmp, 0, 0, bmp.width, bmp.height, matrix, true)
-            bmp.recycle()
-            bmp = mirrored
-        }
+        val bmp = BitmapFactory.decodeByteArray(rawBytes, 0, rawBytes.size) ?: return rawBytes
 
         if (!watermark.isNullOrEmpty()) {
             val canvas = android.graphics.Canvas(bmp)
@@ -300,6 +297,28 @@ class CameraServerService : LifecycleService() {
         bmp.compress(Bitmap.CompressFormat.JPEG, quality, finalOut)
         bmp.recycle()
         return finalOut.toByteArray()
+    }
+
+    /** Horizontal flip on raw NV21 bytes (Y plane + interleaved VU plane), no Bitmap needed. */
+    private fun flipNv21Horizontal(nv21: ByteArray, width: Int, height: Int): ByteArray {
+        val out = ByteArray(nv21.size)
+        for (row in 0 until height) {
+            val rowStart = row * width
+            for (col in 0 until width) {
+                out[rowStart + col] = nv21[rowStart + (width - 1 - col)]
+            }
+        }
+        val ySize = width * height
+        val chromaWidth = width / 2
+        for (row in 0 until height / 2) {
+            val rowStart = ySize + row * chromaWidth * 2
+            for (col in 0 until chromaWidth) {
+                val srcCol = chromaWidth - 1 - col
+                out[rowStart + col * 2] = nv21[rowStart + srcCol * 2]
+                out[rowStart + col * 2 + 1] = nv21[rowStart + srcCol * 2 + 1]
+            }
+        }
+        return out
     }
 
     private fun yuv420ToNv21(image: ImageProxy): ByteArray {

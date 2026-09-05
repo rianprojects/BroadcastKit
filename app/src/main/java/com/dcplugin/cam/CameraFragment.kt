@@ -132,6 +132,11 @@ class CameraFragment : Fragment(), SensorEventListener {
         binding.shakeSwitch.isChecked = getPrefs().getBoolean(KEY_SHAKE, false)
         binding.shakeSwitch.setOnCheckedChangeListener { _, checked ->
             getPrefs().edit().putBoolean(KEY_SHAKE, checked).apply()
+            if (checked) {
+                accelerometer?.let { sensorManager?.registerListener(this, it, SensorManager.SENSOR_DELAY_UI) }
+            } else {
+                sensorManager?.unregisterListener(this)
+            }
         }
 
         binding.footerLink.setOnClickListener { openUrl("https://rianprojects.my.id") }
