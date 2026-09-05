@@ -21,6 +21,17 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        // Night-mode toggle recreates this Activity; FragmentManager then restores the
+        // old fragment instances from savedInstanceState, but the `by lazy` fields above
+        // create fresh ones unaware of them — leading to duplicate/overlapping fragments
+        // (visible as flicker) on the next nav click. Drop the restored ones so only the
+        // freshly created lazy instances are ever added.
+        if (savedInstanceState != null) {
+            val tx = supportFragmentManager.beginTransaction()
+            supportFragmentManager.fragments.forEach { tx.remove(it) }
+            tx.commitNow()
+        }
+
         binding.bottomNav.root.setOnItemSelectedListener { item ->
             val target = when (item.itemId) {
                 R.id.nav_camera -> cameraFragment
