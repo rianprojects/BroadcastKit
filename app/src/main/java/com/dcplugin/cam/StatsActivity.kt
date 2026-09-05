@@ -1,5 +1,6 @@
 package com.dcplugin.cam
 
+import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -29,8 +30,20 @@ class StatsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityStatsBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        supportActionBar?.title = "Stream Stats"
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        binding.appToolbar.toolbarTitle.text = "Stream Stats"
+        binding.appToolbar.toolbarBack.visibility = android.view.View.VISIBLE
+        binding.appToolbar.toolbarBack.setOnClickListener { finish() }
+
+        binding.bottomNav.root.selectedItemId = R.id.nav_more
+        binding.bottomNav.root.setOnItemSelectedListener { item ->
+            if (item.itemId == R.id.nav_more) {
+                finish()
+            } else {
+                startActivity(Intent(this, MainActivity::class.java).putExtra(MainActivity.EXTRA_TAB, item.itemId))
+                finish()
+            }
+            true
+        }
     }
 
     override fun onResume() {

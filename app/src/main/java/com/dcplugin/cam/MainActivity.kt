@@ -34,8 +34,13 @@ class MainActivity : AppCompatActivity() {
         }
 
         if (savedInstanceState == null) {
-            binding.bottomNav.root.selectedItemId = R.id.nav_camera
+            val tab = intent.getIntExtra(EXTRA_TAB, R.id.nav_camera)
+            binding.bottomNav.root.selectedItemId = tab
         }
+    }
+
+    companion object {
+        const val EXTRA_TAB = "extra_tab"
     }
 
     private fun showFragment(fragment: Fragment) {

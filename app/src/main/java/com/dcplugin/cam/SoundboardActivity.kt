@@ -1,5 +1,6 @@
 package com.dcplugin.cam
 
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.view.Gravity
@@ -23,8 +24,20 @@ class SoundboardActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivitySoundboardBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        supportActionBar?.title = "Soundboard"
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        binding.appToolbar.toolbarTitle.text = "Soundboard"
+        binding.appToolbar.toolbarBack.visibility = android.view.View.VISIBLE
+        binding.appToolbar.toolbarBack.setOnClickListener { finish() }
+
+        binding.bottomNav.root.selectedItemId = R.id.nav_more
+        binding.bottomNav.root.setOnItemSelectedListener { item ->
+            if (item.itemId == R.id.nav_more) {
+                finish()
+            } else {
+                startActivity(Intent(this, MainActivity::class.java).putExtra(MainActivity.EXTRA_TAB, item.itemId))
+                finish()
+            }
+            true
+        }
 
         binding.sbRefreshBtn.setOnClickListener { loadMediaSources() }
     }

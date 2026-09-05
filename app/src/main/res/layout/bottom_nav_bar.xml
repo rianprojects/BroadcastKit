@@ -5,7 +5,15 @@
     android:id="@+id/bottomNav"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:minHeight="56dp"
+    android:paddingTop="10dp"
     android:layout_gravity="bottom"
+    android:background="@drawable/bg_dock_menu"
+    android:elevation="16dp"
     app:menu="@menu/bottom_nav_menu"
-    android:background="?android:attr/windowBackground"
-    android:elevation="8dp" />
+    app:labelVisibilityMode="labeled"
+    app:itemIconTint="@color/dock_icon_tint"
+    app:itemTextColor="@color/dock_icon_tint"
+    app:itemIconSize="22dp"
+    app:itemRippleColor="@android:color/transparent"
+    app:itemBackground="@android:color/transparent" />

@@ -1,5 +1,6 @@
 package com.dcplugin.cam
 
+import android.content.Intent
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.view.WindowManager
@@ -19,8 +20,20 @@ class TimerActivity : AppCompatActivity() {
         window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
         binding = ActivityTimerBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        supportActionBar?.title = "Timer / Countdown"
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        binding.appToolbar.toolbarTitle.text = "Timer / Countdown"
+        binding.appToolbar.toolbarBack.visibility = android.view.View.VISIBLE
+        binding.appToolbar.toolbarBack.setOnClickListener { finish() }
+
+        binding.bottomNav.root.selectedItemId = R.id.nav_more
+        binding.bottomNav.root.setOnItemSelectedListener { item ->
+            if (item.itemId == R.id.nav_more) {
+                finish()
+            } else {
+                startActivity(Intent(this, MainActivity::class.java).putExtra(MainActivity.EXTRA_TAB, item.itemId))
+                finish()
+            }
+            true
+        }
 
         updateDisplay()
 

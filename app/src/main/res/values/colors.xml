@@ -10,4 +10,5 @@
     <color name="accent">#3D7BFF</color>
     <color name="control_bg">#EEF0F4</color>
     <color name="whatsapp">#25D366</color>
+    <color name="dock_indicator">#1F3D7BFF</color>
 </resources>

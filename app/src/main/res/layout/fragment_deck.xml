@@ -4,8 +4,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/bg"
-    android:padding="16dp">
+    android:background="@color/bg">
+
+    <include android:id="@+id/appToolbar" layout="@layout/toolbar_simple" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:padding="16dp">
 
     <!-- Connect Bar -->
     <androidx.cardview.widget.CardView
@@ -76,30 +84,49 @@
     <!-- Quick Actions (Stream / Record / Studio Mode) -->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="48dp"
         android:orientation="horizontal"
-        android:layout_marginBottom="12dp">
+        android:layout_marginBottom="12dp"
+        android:weightSum="3">
         <Button
             android:id="@+id/btnToggleStream"
             android:layout_width="0dp"
             android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:text="🔴 Stream"
+            android:layout_height="match_parent"
+            android:text="Stream"
+            android:textSize="13sp"
+            android:singleLine="true"
+            android:drawableStart="@drawable/ic_action_stream"
+            android:drawablePadding="6dp"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
             android:backgroundTint="#D32F2F" />
         <Button
             android:id="@+id/btnToggleRecord"
             android:layout_width="0dp"
             android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:text="⏺ Record"
+            android:layout_height="match_parent"
+            android:text="Record"
+            android:textSize="13sp"
+            android:singleLine="true"
+            android:drawableStart="@drawable/ic_action_record"
+            android:drawablePadding="6dp"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
             android:backgroundTint="#1976D2"
             android:layout_marginStart="6dp" />
         <Button
             android:id="@+id/btnCut"
             android:layout_width="0dp"
             android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:text="⚡ Transition"
+            android:layout_height="match_parent"
+            android:text="Transition"
+            android:textSize="13sp"
+            android:singleLine="true"
+            android:drawableStart="@drawable/ic_action_transition"
+            android:drawablePadding="6dp"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
             android:backgroundTint="#388E3C"
             android:layout_marginStart="6dp" />
     </LinearLayout>
@@ -127,4 +154,5 @@
             android:useDefaultMargins="true" />
     </ScrollView>
 
+    </LinearLayout>
 </LinearLayout>

@@ -29,6 +29,7 @@ class DeckFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.appToolbar.toolbarTitle.text = "OBS Deck"
         val prefs = requireContext().getSharedPreferences("settings", Context.MODE_PRIVATE)
         binding.obsHostInput.setText(prefs.getString("obs_host", ""))
         binding.obsPasswordInput.setText(prefs.getString("obs_pass", ""))

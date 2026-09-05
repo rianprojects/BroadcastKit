@@ -5,6 +5,8 @@
     android:orientation="vertical"
     android:background="@color/bg">
 
+    <include android:id="@+id/appToolbar" layout="@layout/toolbar_simple" />
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
