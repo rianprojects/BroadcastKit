@@ -221,14 +221,14 @@ class CameraFragment : Fragment(), SensorEventListener {
     private fun getPrefs(): SharedPreferences = requireContext().getSharedPreferences(PREFS, Context.MODE_PRIVATE)
 
     private fun loadInputs() {
-        binding.portInput.setText(getPrefs().getInt(KEY_PORT, 8080).toString())
+        binding.portInput.setText(getPrefs().getInt(KEY_PORT, 8899).toString())
         binding.pinInput.setText(getPrefs().getString(KEY_PIN, ""))
         binding.watermarkInput.setText(getPrefs().getString(KEY_WATERMARK, ""))
         binding.timerInput.setText(getPrefs().getInt(KEY_TIMER, 0).toString())
     }
 
     private fun saveInputs() {
-        val port = binding.portInput.text.toString().toIntOrNull() ?: 8080
+        val port = binding.portInput.text.toString().toIntOrNull() ?: 8899
         val pin = binding.pinInput.text.toString().trim().ifEmpty { null }
         val watermark = binding.watermarkInput.text.toString().trim().ifEmpty { null }
         val timer = binding.timerInput.text.toString().toIntOrNull() ?: 0
@@ -248,7 +248,7 @@ class CameraFragment : Fragment(), SensorEventListener {
     }
 
     private fun applySavedConfigToService() {
-        val port = getPrefs().getInt(KEY_PORT, 8080)
+        val port = getPrefs().getInt(KEY_PORT, 8899)
         val pin = getPrefs().getString(KEY_PIN, null)
         val watermark = getPrefs().getString(KEY_WATERMARK, null)
         val quality = getPrefs().getInt(KEY_QUALITY, 80)
@@ -424,7 +424,7 @@ class CameraFragment : Fragment(), SensorEventListener {
     }
 
     private fun getActiveUrl(): String {
-        val port = binding.portInput.text.toString().toIntOrNull() ?: 8080
+        val port = binding.portInput.text.toString().toIntOrNull() ?: 8899
         val pin = binding.pinInput.text.toString().trim().ifEmpty { null }
         val pinSuffix = if (!pin.isNullOrEmpty()) "?pin=$pin" else ""
         return "http://${getLocalIpAddress()}:$port/video$pinSuffix"
@@ -436,7 +436,7 @@ class CameraFragment : Fragment(), SensorEventListener {
         binding.urlText.text = if (running) {
             val size = boundService?.actualSize
             var text = "OBS / Browser URL:\n$activeUrl"
-            getTailscaleIpAddress()?.let { text += "\n\nOver Tailscale:\nhttp://$it:${boundService?.serverPort ?: 8080}/video" }
+            getTailscaleIpAddress()?.let { text += "\n\nOver Tailscale:\nhttp://$it:${boundService?.serverPort ?: 8899}/video" }
             if (size != null) text += "\n\nStream resolution: ${size.width}x${size.height}"
             text
         } else {
@@ -474,7 +474,7 @@ class CameraFragment : Fragment(), SensorEventListener {
 
     private fun exportSettings() {
         val obj = JSONObject().apply {
-            put(KEY_PORT, getPrefs().getInt(KEY_PORT, 8080))
+            put(KEY_PORT, getPrefs().getInt(KEY_PORT, 8899))
             put(KEY_PIN, getPrefs().getString(KEY_PIN, ""))
             put(KEY_WATERMARK, getPrefs().getString(KEY_WATERMARK, ""))
             put(KEY_QUALITY, getPrefs().getInt(KEY_QUALITY, 80))
@@ -496,7 +496,7 @@ class CameraFragment : Fragment(), SensorEventListener {
         try {
             val obj = JSONObject(text)
             getPrefs().edit()
-                .putInt(KEY_PORT, obj.optInt(KEY_PORT, 8080))
+                .putInt(KEY_PORT, obj.optInt(KEY_PORT, 8899))
                 .putString(KEY_PIN, obj.optString(KEY_PIN, ""))
                 .putString(KEY_WATERMARK, obj.optString(KEY_WATERMARK, ""))
                 .putInt(KEY_QUALITY, obj.optInt(KEY_QUALITY, 80))

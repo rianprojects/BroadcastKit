@@ -64,7 +64,7 @@ class CameraServerService : LifecycleService() {
     var jpegQuality = 80
         private set
     var watermarkText: String? = null
-    var serverPort = 8080
+    var serverPort = 8899
         private set
     var serverPin: String? = null
         private set
@@ -86,7 +86,7 @@ class CameraServerService : LifecycleService() {
         startCamera()
     }
 
-    private fun startServer() {
+    private fun startServer(attempt: Int = 0) {
         server?.stop()
         server = null
         try {
@@ -95,8 +95,10 @@ class CameraServerService : LifecycleService() {
             }.also { it.start(5000, false) }
         } catch (e: java.io.IOException) {
             // Port left bound by a not-yet-released previous instance (e.g. quick app
-            // restart). Don't crash the service — camera streaming still runs, only the
-            // HTTP server is unavailable until the port frees up.
+            // restart) — it frees up within ~1s. Retry a few times before giving up.
+            if (attempt < 5) {
+                android.os.Handler(mainLooper).postDelayed({ startServer(attempt + 1) }, 400)
+            }
         }
     }
 
