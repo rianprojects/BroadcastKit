@@ -74,7 +74,7 @@
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:layout_height="wrap_content"
-                        android:text="⚪ Server Stopped"
+                        android:text="Server Stopped"
                         android:textColor="@color/text_primary"
                         android:textSize="13sp"
                         android:textStyle="bold" />
@@ -92,7 +92,7 @@
                     android:id="@+id/batteryText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="🔋 --% | 🌡️ --°C"
+                    android:text="Battery --% | --°C"
                     android:textColor="@color/text_secondary"
                     android:textSize="11sp"
                     android:layout_marginTop="4dp" />
@@ -163,7 +163,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="52dp"
                                 android:layout_marginStart="8dp"
-                                android:text="📋"
+                                android:text="Copy"
                                 android:backgroundTint="@color/control_bg"
                                 android:textColor="@color/text_primary"
                                 android:minWidth="52dp" />
@@ -218,19 +218,10 @@
                             android:layout_marginBottom="8dp" />
 
                         <Button
-                            android:id="@+id/switchCameraButton"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="Switch Camera (Back/Front)"
-                            android:backgroundTint="@color/control_bg"
-                            android:textColor="@color/text_primary"
-                            android:layout_marginBottom="8dp" />
-
-                        <Button
                             android:id="@+id/flashButton"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="🔦 Flash: OFF"
+                            android:text="Flash: OFF"
                             android:backgroundTint="@color/control_bg"
                             android:textColor="@color/text_primary"
                             android:layout_marginBottom="8dp" />
@@ -239,7 +230,7 @@
                             android:id="@+id/dimmerButton"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="🌙 Screen Dimmer: OFF"
+                            android:text="Screen Dimmer: OFF"
                             android:backgroundTint="@color/control_bg"
                             android:textColor="@color/text_primary"
                             android:layout_marginBottom="16dp" />

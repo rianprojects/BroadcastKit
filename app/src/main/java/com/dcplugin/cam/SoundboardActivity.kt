@@ -50,7 +50,7 @@ class SoundboardActivity : AppCompatActivity() {
     private fun loadMediaSources() {
         val obs = OBSWebSocketManager.get()
         if (obs == null || !obs.isConnected) {
-            binding.sbStatusText.text = "⚪ OBS not connected. Open OBS Deck and connect first."
+            binding.sbStatusText.text = "OBS not connected. Open OBS Deck and connect first."
             return
         }
         binding.sbStatusText.text = "Fetching media sources from OBS…"
@@ -71,7 +71,7 @@ class SoundboardActivity : AppCompatActivity() {
                 for (i in 0 until inputs.length()) {
                     val name = inputs.getJSONObject(i).optString("inputName")
                     val btn = Button(this).apply {
-                        text = "🔊 $name"
+                        text = name
                         isAllCaps = false
                         setBackgroundColor(Color.parseColor("#424242"))
                         setTextColor(Color.WHITE)

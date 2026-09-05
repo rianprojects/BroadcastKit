@@ -74,7 +74,7 @@
                 android:id="@+id/obsStatusText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="⚪ Not Connected"
+                android:text="Not Connected"
                 android:textSize="12sp"
                 android:textColor="@color/text_secondary"
                 android:layout_marginTop="6dp" />

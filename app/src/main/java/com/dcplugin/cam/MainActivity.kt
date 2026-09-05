@@ -44,10 +44,20 @@ class MainActivity : AppCompatActivity() {
             true
         }
 
-        if (savedInstanceState == null) {
-            val tab = intent.getIntExtra(EXTRA_TAB, R.id.nav_camera)
-            binding.bottomNav.root.selectedItemId = tab
+        val tab = if (savedInstanceState == null) {
+            intent.getIntExtra(EXTRA_TAB, R.id.nav_camera)
+        } else {
+            binding.bottomNav.root.selectedItemId
         }
+        binding.bottomNav.root.selectedItemId = tab
+        showFragment(
+            when (tab) {
+                R.id.nav_deck -> deckFragment
+                R.id.nav_tally -> tallyFragment
+                R.id.nav_more -> moreFragment
+                else -> cameraFragment
+            }
+        )
     }
 
     companion object {

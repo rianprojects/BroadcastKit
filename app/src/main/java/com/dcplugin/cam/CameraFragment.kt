@@ -63,7 +63,7 @@ class CameraFragment : Fragment(), SensorEventListener {
             val scale = intent.getIntExtra(BatteryManager.EXTRA_SCALE, -1)
             val pct = if (level != -1 && scale != -1) (level * 100 / scale) else -1
             val temp = intent.getIntExtra(BatteryManager.EXTRA_TEMPERATURE, 0) / 10.0
-            binding.batteryText.text = "🔋 $pct% | 🌡️ $temp°C"
+            binding.batteryText.text = "Battery $pct% | $temp°C"
         }
     }
 
@@ -158,24 +158,23 @@ class CameraFragment : Fragment(), SensorEventListener {
         binding.flashButton.setOnClickListener {
             boundService?.toggleTorch()
             val on = boundService?.isTorchOn == true
-            binding.flashButton.text = if (on) "🔦 Flash: ON" else "🔦 Flash: OFF"
+            binding.flashButton.text = if (on) "Flash: ON" else "Flash: OFF"
         }
 
         binding.dimmerButton.setOnClickListener {
             isDimmed = !isDimmed
             binding.screenDimmer.visibility = if (isDimmed) View.VISIBLE else View.GONE
-            binding.dimmerButton.text = if (isDimmed) "🌙 Screen Dimmer: ON" else "🌙 Screen Dimmer: OFF"
+            binding.dimmerButton.text = if (isDimmed) "Screen Dimmer: ON" else "Screen Dimmer: OFF"
         }
         binding.screenDimmer.setOnClickListener {
             isDimmed = false
             binding.screenDimmer.visibility = View.GONE
-            binding.dimmerButton.text = "🌙 Screen Dimmer: OFF"
+            binding.dimmerButton.text = "Screen Dimmer: OFF"
         }
 
         binding.mirrorSwitch.setOnCheckedChangeListener { _, checked -> boundService?.toggleMirror(checked) }
         binding.aeLockSwitch.setOnCheckedChangeListener { _, checked -> boundService?.toggleAeLock(checked) }
 
-        binding.switchCameraButton.setOnClickListener { boundService?.switchCamera() }
 
         binding.exportSettingsButton.setOnClickListener { exportSettings() }
         binding.importSettingsButton.setOnClickListener { importSettings() }
@@ -374,7 +373,7 @@ class CameraFragment : Fragment(), SensorEventListener {
     private fun setupControls() {
         setupExposureBar()
         setupZoomBar()
-        binding.flashButton.text = if (boundService?.isTorchOn == true) "🔦 Flash: ON" else "🔦 Flash: OFF"
+        binding.flashButton.text = if (boundService?.isTorchOn == true) "Flash: ON" else "Flash: OFF"
         binding.mirrorSwitch.isChecked = boundService?.isMirrorOn == true
         binding.aeLockSwitch.isChecked = boundService?.isAeLocked == true
         val isFront = boundService?.lensFacing == CameraSelector.LENS_FACING_FRONT
@@ -422,13 +421,13 @@ class CameraFragment : Fragment(), SensorEventListener {
         val kbps = srv?.currentKbps ?: 0L
 
         if (running && clients > 0) {
-            binding.clientCountText.text = "🟢 Connected ($clients OBS / Client)"
+            binding.clientCountText.text = "Connected ($clients OBS / Client)"
             binding.clientCountText.setTextColor(0xFF4CAF50.toInt())
         } else if (running) {
-            binding.clientCountText.text = "🟡 Server Running (Waiting for OBS)"
+            binding.clientCountText.text = "Server Running (Waiting for OBS)"
             binding.clientCountText.setTextColor(0xFFFFC107.toInt())
         } else {
-            binding.clientCountText.text = "⚪ Server Stopped"
+            binding.clientCountText.text = "Server Stopped"
             binding.clientCountText.setTextColor(0xFF888888.toInt())
         }
         binding.fpsText.text = "$fps FPS | $kbps KB/s"

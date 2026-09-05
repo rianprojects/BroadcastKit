@@ -50,10 +50,10 @@ class StatsActivity : AppCompatActivity() {
         super.onResume()
         val obs = OBSWebSocketManager.get()
         if (obs == null || !obs.isConnected) {
-            binding.statsConnText.text = "⚪ Not connected. Open OBS Deck and connect first."
+            binding.statsConnText.text = "Not connected. Open OBS Deck and connect first."
             return
         }
-        binding.statsConnText.text = "🟢 Connected"
+        binding.statsConnText.text = "Connected"
         polling = true
         handler.post(pollRunnable)
     }
@@ -90,7 +90,7 @@ class StatsActivity : AppCompatActivity() {
                 val total = r.optInt("outputTotalFrames", 1).coerceAtLeast(1)
                 val dropPct = (dropped * 100.0 / total)
 
-                binding.streamStatusText.text = if (active) "🔴 LIVE — $timecode" else "Stream Status: OFFLINE"
+                binding.streamStatusText.text = if (active) "LIVE — $timecode" else "Stream Status: OFFLINE"
                 binding.bitrateText.text = "${kbps} kbps"
                 binding.droppedText.text = "$dropped (${String.format("%.1f", dropPct)}%)"
             }
