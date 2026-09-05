@@ -13,7 +13,7 @@ Aplikasi Android pendamping untuk OBS: streaming kamera HP sebagai sumber video 
 - Foreground service agar streaming tetap jalan saat aplikasi di-background.
 - **Dock menu & UI konsisten (v0.1)** — bottom navigation modern (vector icon, dark theme, tanpa emoji), toolbar seragam di semua layar (OBS Deck, More, Stats, Timer, Soundboard).
 
-> Rilis APK siap pakai: lihat [Releases](https://github.com/rianprojects/android-dcplugin/releases).
+> Rilis APK siap pakai: lihat [Releases](https://github.com/rianprojects/BroadcastKit/releases).
 
 ## Spesifikasi Perangkat
 
@@ -53,9 +53,9 @@ android/
 1. Install [Android Studio](https://developer.android.com/studio) (sudah termasuk Android SDK).
 2. Clone repo:
    ```bash
-   git clone https://github.com/rianprojects/android-dcplugin.git
+   git clone https://github.com/rianprojects/BroadcastKit.git
    ```
-3. Buka Android Studio → **Open** → pilih folder `android-dcplugin` (folder yang berisi `settings.gradle.kts`).
+3. Buka Android Studio → **Open** → pilih folder `BroadcastKit` (folder yang berisi `settings.gradle.kts`).
 4. Tunggu proses **Gradle Sync** selesai (pojok kanan bawah). Kalau diminta update Gradle/SDK, ikuti saja.
 5. Sambungkan HP Android via USB (aktifkan **USB Debugging** di Developer Options) atau siapkan emulator.
 6. Klik tombol **Run ▶** (atau `Shift+F10`) — pilih device tujuan.
@@ -66,8 +66,8 @@ android/
 1. Pastikan `JAVA_HOME` mengarah ke JDK 17+ dan Android SDK sudah terinstall (`ANDROID_HOME` di-set).
 2. Clone repo lalu masuk ke foldernya:
    ```bash
-   git clone https://github.com/rianprojects/android-dcplugin.git
-   cd android-dcplugin
+   git clone https://github.com/rianprojects/BroadcastKit.git
+   cd BroadcastKit
    ```
 3. Build APK debug:
    ```bash
