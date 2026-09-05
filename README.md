@@ -1,4 +1,4 @@
-# DC Plugin — Android Camera & Control App
+# BroadcastKit — Android Camera & Control App
 
 Aplikasi Android pendamping untuk OBS: streaming kamera HP sebagai sumber video (MJPEG) ke OBS/PC di jaringan yang sama, plus kontrol tambahan seperti tally light, timer, dan soundboard.
 
