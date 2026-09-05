@@ -102,6 +102,8 @@ android/
 3. Jalankan streaming dari app — catat alamat IP:port yang muncul (default port **8899**, bisa diganti manual di app kalau bentrok dengan service lain di HP).
 4. Di OBS, tambahkan **Source → Browser** atau **Media Source** dengan URL MJPEG tersebut (`http://<ip-hp>:8899/video`), atau hubungkan lewat OBS WebSocket sesuai konfigurasi di app.
 
+> **Tips mengurangi delay:** gunakan Wi-Fi **5GHz atau Wi-Fi 6** (bukan 2.4GHz) untuk HP dan PC/OBS, dan pastikan keduanya konek ke access point yang sama (bukan lewat router berbeda/mesh yang jauh). Band 2.4GHz lebih rentan interferensi dan bandwidth-nya lebih kecil, sehingga delay/lag MJPEG streaming jadi lebih terasa.
+
 ## Izin yang Digunakan
 
 | Permission | Kegunaan |
