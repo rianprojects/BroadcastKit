@@ -11,7 +11,7 @@ Aplikasi Android pendamping untuk OBS: streaming kamera HP sebagai sumber video 
 - **Stats** — informasi statistik koneksi/stream.
 - **OBS WebSocket integration** — komunikasi dua arah dengan OBS Studio.
 - Foreground service agar streaming tetap jalan saat aplikasi di-background.
-- **Dock menu & UI konsisten (v1.3)** — bottom navigation modern (vector icon, dark theme, tanpa emoji), toolbar seragam di semua layar (OBS Deck, More, Stats, Timer, Soundboard).
+- **Dock menu & UI konsisten (v0.1)** — bottom navigation modern (vector icon, dark theme, tanpa emoji), toolbar seragam di semua layar (OBS Deck, More, Stats, Timer, Soundboard).
 
 > Rilis APK siap pakai: lihat [Releases](https://github.com/rianprojects/android-dcplugin/releases).
 

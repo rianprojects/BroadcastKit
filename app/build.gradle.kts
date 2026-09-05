@@ -11,8 +11,8 @@ android {
         applicationId = "com.dcplugin.cam"
         minSdk = 24
         targetSdk = 34
-        versionCode = 4
-        versionName = "1.3"
+        versionCode = 1
+        versionName = "0.1"
     }
 
     buildTypes {
