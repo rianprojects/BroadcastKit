@@ -12,3 +12,4 @@ app/release/
 *.apk
 *.aab
 *.idsig
+RELEASE_NOTES_DEV.md
