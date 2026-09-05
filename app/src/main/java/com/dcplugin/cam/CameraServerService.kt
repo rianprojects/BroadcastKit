@@ -88,9 +88,16 @@ class CameraServerService : LifecycleService() {
 
     private fun startServer() {
         server?.stop()
-        server = MjpegServer(serverPort, serverPin) { action, value ->
-            handleRemoteCommand(action, value)
-        }.also { it.start(5000, false) }
+        server = null
+        try {
+            server = MjpegServer(serverPort, serverPin) { action, value ->
+                handleRemoteCommand(action, value)
+            }.also { it.start(5000, false) }
+        } catch (e: java.io.IOException) {
+            // Port left bound by a not-yet-released previous instance (e.g. quick app
+            // restart). Don't crash the service — camera streaming still runs, only the
+            // HTTP server is unavailable until the port frees up.
+        }
     }
 
     fun reconfigureServer(port: Int, pin: String?) {
