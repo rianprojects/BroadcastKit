@@ -545,7 +545,7 @@
                     android:gravity="center"
                     android:textColor="@color/text_hint"
                     android:textSize="12sp"
-                    android:text="Camera Plugin v1.2" />
+                    android:text="BroadcastKit v0.1" />
 
                 <TextView
                     android:id="@+id/footerLink"

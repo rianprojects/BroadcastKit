@@ -137,7 +137,7 @@ class MjpegServer(
         val pinSuffix = if (!pin.isNullOrEmpty()) "?pin=$pin" else ""
         return """
         <html><body style="background:#111;color:#eee;font-family:sans-serif;text-align:center;padding:20px">
-        <h2>Camera Plugin v1.2</h2>
+        <h2>BroadcastKit v0.1</h2>
         <div style="padding:10px;background:#222;display:inline-block;border-radius:8px;margin-bottom:15px">
             <b>Status:</b> ${if (clients > 0) "<span style='color:#4CAF50'>Connected ($clients Clients)</span>" else "<span style='color:#bbb'>Idle / No Client</span>"}<br>
             <b>Live Stats:</b> $currentFps FPS | $currentKbps KB/s<br>
